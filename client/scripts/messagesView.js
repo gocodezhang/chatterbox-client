@@ -12,19 +12,28 @@ var MessagesView = {
     // MessagesView.$chats.empty();
     // attempt trim of excess chat children ?
 
-    // if (MessagesView.$chats.children.length > 50) {
-
-    // }
-    MessagesView.$chats.empty();
     MessagesView.render();
-    console.log('Hmm? >>>> ', MessagesView.$chats.children().length);
-    // $('.username').on('click', MessagesView.handleClick);
-    MessagesView.$chats.on('click', '.username', MessagesView.handleClick);
+    // console.log('Hmm? >>>> ', MessagesView.$chats.children().length);
+    $('#chats .username').on('click', MessagesView.handleClick);
+    $('#chats .username').mouseenter(function () {
+      $(this).css({
+        'color': 'blue',
+        'cursor': 'pointer'
+      });
+    })
+      .mouseleave(function () {
+        $(this).css({
+          'color': 'black',
+          'cursor': 'default'
+        });
+      });
+    // MessagesView.$chats.on('click', '.username', MessagesView.handleClick);
 
   },
 
   render: function() {
     // TODO: Render _all_ the messages.
+    MessagesView.$chats.empty();
     Messages._data.forEach(function (message) {
       MessagesView.$chats.append(MessagesView.renderMessage(message));
     });
@@ -48,7 +57,6 @@ var MessagesView = {
     // (this should add the sender to the user's friend list).
     var friendName = $(this).text();
     Friends.toggleStatus(friendName);
-    console.log(friendName);
   }
 
 };

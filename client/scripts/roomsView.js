@@ -13,12 +13,15 @@ var RoomsView = {
     // RoomsView.$select.empty();
     RoomsView.render();
     RoomsView.$button.on('click', RoomsView.handleClick);
+    RoomsView.$select.on('change', RoomsView.handleChange);
 
   },
 
   render: function() {
     // TODO: Render out the list of rooms.
     RoomsView.$select.empty();
+    var def = '<option disabled selected value> -- select an option -- </option>';
+    RoomsView.$select.append(def);
     Rooms._data.forEach(function(room) {
       RoomsView.renderRoom(room);
     });
@@ -34,6 +37,12 @@ var RoomsView = {
     // TODO: Handle a user selecting a different room.
     // tell rooms.js we have selected a room
     var room = $(this).val();
+    var roomMessages = Messages._retrieve(room);
+    $('#chats').empty();
+
+    roomMessages.forEach(function(message) {
+      MessagesView.renderMessage(message);
+    });
   },
 
   handleClick: function(event) {

@@ -49,7 +49,7 @@ var App = {
 
       // hmmmmmm ...
       // App.startSpinner();
-      setTimeout(App.fetch.bind(this, App.stopSpinner), 10000);
+      // setTimeout(App.fetch.bind(this, App.stopSpinner), 10000);
     });
   },
 
